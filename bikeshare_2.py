@@ -73,12 +73,11 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     try:
-        df = pd.read_csv(CITY_DATA[city])
+        # read city data convert the Start Time column to datetime
+        df = pd.read_csv(CITY_DATA[city], parse_dates=['Start Time'])
+
     except IOError:
         print("Error: Could not find file or read data")
-
-    # convert the Start Time column to datetime
-    df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
