@@ -21,10 +21,15 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
+    # Prompt constants
+    CITY_PROMPT = "What city would you like to analyze (Chicago, New York, or Washington)?"
+    MONTH_PROMPT = "What month would you like to analyze (Jan, Feb, Mar, Apr, May, or Jun)? Type All for no month filter"
+    DAY_PROMPT = "What day of week would you like to analyze (Sun, Mon, Tue, Wed, Thu, Fri, Sat)? Type All for no day of week filter"
+    
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
-        city = str(input('\nWhat city would you like to analyze (Chicago, New York, or Washington)?\n')).lower()
+        city = str(input(CITY_PROMPT)).lower()
             
         if city not in CITY_DATA.keys():
             print('\nYou must select Chicago, New York, or Washington')
@@ -34,7 +39,7 @@ def get_filters():
 
     # get user input for month (all, january, february, ... , june)
     while True:
-        month = str(input('\nWhat month would you like to analyze (Jan, Feb, Mar, Apr, May, or Jun)? Type All for no month filter\n')).lower()
+        month = str(input(MONTH_PROMPT)).lower()
             
         if month not in MONTH_DATA:
             print('\nYou must enter Jan, Feb, Mar, Apr, May, Jun or All')
@@ -44,7 +49,7 @@ def get_filters():
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
-        day = str(input('\nWhat day of week would you like to analyze (Sun, Mon, Tue, Wed, Thu, Fri, Sat)? Type All for no day of week filter\n')).lower()
+        day = str(input(DAY_PROMPT)).lower()
             
         if day not in DAY_OF_WEEK:
             print('\nYou must enter Sun, Mon, Tue, Wed, Thu, Fri, Sat or All')
