@@ -7,7 +7,7 @@ Created project on 4/11/2023
 Bike Share
 
 ### Description
-Describe what your project is about and what it does
+The bikeshare.py application is an interactive command-line tool designed to analyze and provide insights into bike-sharing data from Chicago, New York, or Washington. Users can filter the data based on their preferences, such as city, month, and day of the week. The application processes the user's input and presents relevant statistics about the selected dataset. The user-friendly experience allows users to easily explore different aspects of bike-sharing data, with the option to restart the analysis or exit the program as desired.
 
 ### Files used
 chicago.csv
