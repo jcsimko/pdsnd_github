@@ -21,10 +21,15 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
+    # Prompt constants
+    CITY_PROMPT = "What city would you like to analyze (Chicago, New York, or Washington)?"
+    MONTH_PROMPT = "What month would you like to analyze (Jan, Feb, Mar, Apr, May, or Jun)? Type All for no month filter"
+    DAY_PROMPT = "What day of week would you like to analyze (Sun, Mon, Tue, Wed, Thu, Fri, Sat)? Type All for no day of week filter"
+    
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
-        city = str(input('\nWhat city would you like to analyze (Chicago, New York, or Washington)?\n')).lower()
+        city = str(input(CITY_PROMPT)).lower()
             
         if city not in CITY_DATA.keys():
             print('\nYou must select Chicago, New York, or Washington')
@@ -34,7 +39,7 @@ def get_filters():
 
     # get user input for month (all, january, february, ... , june)
     while True:
-        month = str(input('\nWhat month would you like to analyze (Jan, Feb, Mar, Apr, May, or Jun)? Type All for no month filter\n')).lower()
+        month = str(input(MONTH_PROMPT)).lower()
             
         if month not in MONTH_DATA:
             print('\nYou must enter Jan, Feb, Mar, Apr, May, Jun or All')
@@ -44,7 +49,7 @@ def get_filters():
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
-        day = str(input('\nWhat day of week would you like to analyze (Sun, Mon, Tue, Wed, Thu, Fri, Sat)? Type All for no day of week filter\n')).lower()
+        day = str(input(DAY_PROMPT)).lower()
             
         if day not in DAY_OF_WEEK:
             print('\nYou must enter Sun, Mon, Tue, Wed, Thu, Fri, Sat or All')
@@ -68,12 +73,11 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     try:
-        df = pd.read_csv(CITY_DATA[city])
+        # read city data convert the Start Time column to datetime
+        df = pd.read_csv(CITY_DATA[city], parse_dates=['Start Time'])
+
     except IOError:
         print("Error: Could not find file or read data")
-
-    # convert the Start Time column to datetime
-    df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
@@ -131,8 +135,8 @@ def time_stats(df):
     print('\nMost common month:', common_month)
 
     # display the most common day of week
-    common_dow = DAY_OF_WEEK[df['day_of_week'].mode()[0]]
-    print('\nMost common day of week:', common_dow)
+    common_day_of_week = DAY_OF_WEEK[df['day_of_week'].mode()[0]]
+    print('\nMost common day of week:', common_day_of_week)
 
     # display the most common start hour
     common_hour = df['hour'].mode()[0]
@@ -149,12 +153,12 @@ def station_stats(df):
     start_time = time.time()
 
     # display most commonly used start station
-    common_start_st = df['Start Station'].mode()[0]
-    print('\nMost commonly used start station:', common_start_st)
+    common_start_station = df['Start Station'].mode()[0]
+    print('\nMost commonly used start station:', common_start_station)
 
     # display most commonly used end station     
-    common_end_st = df['End Station'].mode()[0]
-    print('\nMost commonly used end station:', common_end_st)
+    common_end_station = df['End Station'].mode()[0]
+    print('\nMost commonly used end station:', common_end_station)
 
     # display most frequent combination of start station and end station trip      
     common_combined = df['Combined Station'].mode()[0]
