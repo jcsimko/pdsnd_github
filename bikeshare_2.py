@@ -108,9 +108,11 @@ def generic_stats(df):
     print('\nCalculating Generic Statistics ...\n')
     start_time = time.time()
 
+    # display count, mean, standard deviation, minimum, and maximum
     print('\nShow count, mean, standard deviation, minimum, and maximum.')
     print(df.describe())
 
+    # display dimensions of the DataFrame
     print('\nShow the dimensions of the DataFrame.')
     print(df.shape)
 
